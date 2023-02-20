@@ -1,0 +1,37 @@
+.THIS .btnCustomStyle{
+    padding-left: 0.5rem!important;
+    padding-right: 0.5rem!important;
+}
+.THIS .btnCustomStyle{
+    padding-left: 0.5rem!important;
+    padding-right: 0.5rem!important;
+}
+
+/* Style buttons */
+.btn {
+    background-color: DodgerBlue; /* Blue background */
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    padding: 12px 16px; /* Some padding */
+    font-size: 16px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+}
+
+.btnG {
+    background-color: DodgerBlue; /* Blue background */
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    padding: 12px 16px; /* Some padding */
+    font-size: 16px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+}
+
+.logo {
+    height: 25px;
+    width: 25px;
+}
+  
+/* Darker background on mouse-over */
+.btn:hover {
+background-color: RoyalBlue;
+}

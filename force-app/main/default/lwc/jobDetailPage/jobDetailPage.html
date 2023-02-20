@@ -1,0 +1,405 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <template if:true={record}>
+        <div class="slds-col slds-var-m-top_x-small">
+            <lightning-card>
+                <div class="slds-grid slds-gutters slds-wrap">
+                    <div class="slds-col slds-size_1-of-1 slds-large-size_8-of-12">
+                        <h1 id="title" slot="title" style="font-size: 20px; margin-left: 1.5%;">
+                            <lightning-icon icon-name="standard:person_name" size="small"></lightning-icon>
+                            &nbsp; {record.TR1__Job_Title__c}
+                        </h1>
+                        <h2 style="font-size: large; margin-top: 1% ;margin-bottom: 1%;"> &nbsp; Work Experience
+                            Opportunity
+                        </h2>
+                        <h2 style="font-size: medium;"> &nbsp; Key information</h2>
+                        <hr
+                            style="height:2px;border-width:0;color:rgb(0, 0, 0);background-color:rgb(0, 0, 0); margin: 0.22%;">
+                        <p class="slds-var-p-horizontal_small slds-border_bottom"
+                            style="font-size: 14px; margin-top: 1%; margin-left: 1%;">
+                            <lightning-icon icon-name="standard:stage" alternative-text="Application Status"
+                                variant="info" size="x-small"></lightning-icon>
+                            &nbsp;
+                            Application Status: &nbsp; <b> { record.TR1__Status__c } </b>
+                        </p>
+
+                        <p class="slds-var-p-horizontal_small slds-border_bottom" style="font-size: 14px; margin-left: 1%;">
+                            <lightning-icon icon-name="standard:event" alternative-text="Estimated Start Date"
+                                variant="info" size="x-small"></lightning-icon>
+                            &nbsp;
+                            Est. Start Date: &nbsp; <b> { record.TR1__Estimated_Start_Date__c } </b>
+                        </p>
+
+                        <p class="slds-var-p-horizontal_small slds-border_bottom" style="font-size: 14px; margin-left: 1%;">
+                            <lightning-icon icon-name="standard:avatar" alternative-text="Experience type"
+                                variant="info" size="x-small"></lightning-icon>
+                            &nbsp;
+                            Experience type: &nbsp; <b> In person </b>
+                        </p>
+
+                        <p class="slds-var-p-horizontal_small slds-border_bottom" style="font-size: 14px; margin-left: 1%;">
+                            <lightning-icon icon-name="standard:location" alternative-text="Location" variant="info"
+                                size="x-small"></lightning-icon>
+                            &nbsp;
+                            Location: &nbsp; <b> Northumbria NHSFT - Wansbeck General Hospital [AF-NHS] </b>
+                        </p>
+
+                        <p class="slds-var-p-horizontal_small slds-border_bottom" style="font-size: 14px; margin-left: 1%;">
+                            <lightning-icon icon-name="standard:account" alternative-text="Info!" variant="info"
+                                size="x-small"></lightning-icon>
+                            &nbsp;
+                            Role: &nbsp; <b> { record.Name } </b>
+                        </p>
+
+                        <p class="slds-var-p-horizontal_small slds-border_bottom" style="font-size: 14px; margin-left: 1%;">
+                            <lightning-icon icon-name="standard:team_member" alternative-text="Available Places"
+                                variant="info" size="x-small"></lightning-icon>
+                            &nbsp;
+                            Available places: &nbsp; <b> 5 </b>
+                        </p>
+
+                        <!-- <p class="slds-var-p-horizontal_small slds-border_bottom" style="font-size: 14px">
+                            <lightning-icon icon-name="standard:groups" alternative-text="Other Applications"
+                                variant="info" size="x-small"></lightning-icon>
+                            &nbsp;
+                            No. of Other Applications: &nbsp; <b> { record.Applications__c } </b>
+                        </p> -->
+
+                        <br />
+
+                        <h2 style="font-size: medium;"> &nbsp; About this opportunity</h2>
+                        <hr
+                            style="height:2px;border-width:0;color:rgb(0, 0, 0);background-color:rgb(0, 0, 0); margin: 0.22%;">
+
+
+                        <div class="slds-var-m-left_x-small">
+                            <lightning-layout>
+                                <lightning-layout-item>
+                                    <lightning-record-form record-id={record.Id} object-api-name="TR1__Job__c"
+                                        fields={Fields} columns="1" mode="readonly">
+                                    </lightning-record-form>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                            <div class="slds-m-around_medium">
+                                <lightning-badge label='Competitive Salary'></lightning-badge>
+                                <lightning-badge label='Remote Work'></lightning-badge>
+                                <lightning-badge label='Continuous Work'></lightning-badge>
+                                <lightning-badge label='Autonomy'></lightning-badge>
+                            </div>
+                        </div>
+
+
+                        <!--Use template if:true to display/hide popup based on isModalOpen value-->
+                        <template if:true={isModalOpen}>
+                            <!-- Modal/Popup Box LWC starts here -->
+                            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                                <div class="slds-modal__container">
+                                    <!-- Modal/Popup Box LWC header here -->
+                                    <header class="slds-modal__header">
+                                        <button
+                                            class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                                            title="Close" onclick={closeModal}>
+                                            <lightning-icon icon-name="utility:close" alternative-text="close"
+                                                variant="inverse" size="small"></lightning-icon>
+                                            <span class="slds-assistive-text">Close</span>
+                                        </button>
+                                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">
+                                            Request Info</h2>
+                                    </header>
+                                    <!-- Modal/Popup Box LWC body starts here -->
+                                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                        <p><b>Please enter your message for me below.</b></p>
+                                        <div class="slds-form-element">
+                                            <div class="slds-form-element__control">
+                                                <textarea id="textarea-id-01" placeholder="Placeholder text…"
+                                                    class="slds-textarea"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Modal/Popup Box LWC footer starts here -->
+                                    <footer class="slds-modal__footer">
+                                        <button class="slds-button slds-button_neutral" onclick={closeModal}
+                                            title="Cancel">Cancel</button>
+                                        <button class="slds-button slds-button_brand" onclick={submitDetails}
+                                            title="OK">OK</button>
+                                    </footer>
+                                </div>
+                            </section>
+                            <div class="slds-backdrop slds-backdrop_open"></div>
+                        </template>
+
+                        <template if:true={applied}>
+                            <!-- Modal/Popup Box LWC starts here -->
+                            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                                <div class="slds-modal__container">
+                                    <!-- Modal/Popup Box LWC header here -->
+                                    <header class="slds-modal__header">
+                                        <button
+                                            class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                                            title="Close" onclick={closeModal}>
+                                            <lightning-icon icon-name="utility:close" alternative-text="close"
+                                                variant="inverse" size="small"></lightning-icon>
+                                            <span class="slds-assistive-text">Close</span>
+                                        </button>
+                                        <template if:false={finished}>
+                                            <h2 id="modal-heading-02" class="slds-text-heading_medium slds-hyphenate">
+                                                Your Details</h2>
+                                        </template>
+                                        <template if:true={finished}>
+                                            <h2 id="modal-heading-03" class="slds-text-heading_medium slds-hyphenate">
+                                                Successfully Applied</h2>
+                                        </template>
+                                    </header>
+                                    <!-- Modal/Popup Box LWC body starts here -->
+                                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-02">
+                                        <template if:false={finished}>
+                                            <div class={sectionClass}>
+                                                <h3 class="slds-section__title">
+                                                    <button class="slds-button slds-section__title-action"
+                                                        onclick={handleClick}>
+                                                        <lightning-icon icon-name="utility:switch"
+                                                            class="slds-button__icon slds-button__icon_left slds-section__title-action-icon"
+                                                            size="x-small"></lightning-icon>
+                                                        <span class="slds-truncate" title={label}>{label}</span>
+                                                    </button>
+                                                </h3>
+                                                <div class="slds-section__content">
+                                                    <div class="slds-grid slds-gutters">
+                                                        <div class="slds-col slds-size_1-of-2">
+                                                            <lightning-layout>
+                                                                <lightning-layout-item>
+                                                                    <!-- Displaying fields to get information. -->
+                                                                    <lightning-input class="slds-p-around_medium"
+                                                                        label="Applicant Name" name="TR1__Applicant__c"
+                                                                        value="Arial Green">
+                                                                    </lightning-input>
+                                                                    <lightning-input class="slds-p-around_medium"
+                                                                        label="Date of Birth" name="TR1__Applicant__c"
+                                                                        value="05/06/1991">
+                                                                    </lightning-input>
+                                                                    <lightning-input class="slds-p-around_medium"
+                                                                        label="Gender" name="TR1__Applicant__c"
+                                                                        value="Female">
+                                                                    </lightning-input>
+                                                                    
+                                                                    <br />
+                                                                </lightning-layout-item>
+                                                            </lightning-layout>
+                                                        </div>
+                                                        <div class="slds-col slds-size_1-of-2">
+                                                            <lightning-layout>
+                                                                <lightning-layout-item>
+                                                                    <!-- Displaying fields to get information. -->
+                                                                    <lightning-input class="slds-p-around_medium"
+                                                                        label="Ethnicity" name="TR1__Applicant__c"
+                                                                        value="White">
+                                                                    </lightning-input>
+                                                                    <lightning-input class="slds-p-around_medium"
+                                                                        label="Current Title" name="Compliance Status"
+                                                                        value="Nursing Internship - 3 Months Summer Placements">
+                                                                    </lightning-input>
+                                                                    <lightning-input class="slds-p-around_medium"
+                                                                        label="Date Available" name="Date Available"
+                                                                        value="01/03/2023">
+                                                                    </lightning-input>
+                                                                    <br />
+                                                                </lightning-layout-item>
+                                                            </lightning-layout>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class={sectionDetailsClass}>
+                                                <h3 class="slds-section__title">
+                                                    <button class="slds-button slds-section__title-action"
+                                                        onclick={handleContactClick}>
+                                                        <lightning-icon icon-name="utility:switch"
+                                                            class="slds-button__icon slds-button__icon_left slds-section__title-action-icon"
+                                                            size="x-small"></lightning-icon>
+                                                        <span class="slds-truncate" title={label}>Contact Details</span>
+                                                    </button>
+                                                </h3>
+                                                <div class="slds-section__content">
+                                                    <div class="slds-grid slds-gutters">
+                                                        <div class="slds-col slds-size_1-of-2">
+                                                            <lightning-layout>
+                                                                <lightning-layout-item>
+                                                                    <!-- Displaying fields to get information. -->
+                                                                    <lightning-input class="slds-p-around_medium"
+                                                                        label="Email Address" name="TR1__Email__c">
+                                                                    </lightning-input>
+                                                                    <br />
+                                                                </lightning-layout-item>
+                                                            </lightning-layout>
+                                                        </div>
+                                                        <div class="slds-col slds-size_1-of-2">
+                                                            <lightning-layout>
+                                                                <lightning-layout-item>
+                                                                    <!-- Displaying fields to get information. -->
+                                                                    <lightning-input class="slds-p-around_medium"
+                                                                        label="Mobile Phone" name="TR1__Mobile__c"
+                                                                        value="">
+                                                                    </lightning-input>
+                                                                    <br />
+                                                                </lightning-layout-item>
+                                                            </lightning-layout>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class={emergencyDetailsClass}>
+                                                <h3 class="slds-section__title">
+                                                    <button class="slds-button slds-section__title-action"
+                                                        onclick={handleEmergencyClick}>
+                                                        <lightning-icon icon-name="utility:switch"
+                                                            class="slds-button__icon slds-button__icon_left slds-section__title-action-icon"
+                                                            size="x-small"></lightning-icon>
+                                                        <span class="slds-truncate" title={label}>Emergency Details</span>
+                                                    </button>
+                                                </h3>
+                                                <div class="slds-section__content">
+                                                    <div class="slds-grid slds-gutters">
+                                                        <div class="slds-col slds-size_1-of-2">
+                                                            <lightning-layout>
+                                                                <lightning-layout-item>
+                                                                    <!-- Displaying fields to get information. -->
+                                                                    <lightning-input class="slds-p-around_medium"
+                                                                        label="Emergecny Contact Name" name="TR1__Email__c"
+                                                                        value="">
+                                                                    </lightning-input>
+                                                                    <br />
+                                                                </lightning-layout-item>
+                                                            </lightning-layout>
+                                                        </div>
+                                                        <div class="slds-col slds-size_1-of-2">
+                                                            <lightning-layout>
+                                                                <lightning-layout-item>
+                                                                    <!-- Displaying fields to get information. -->
+                                                                    <lightning-input class="slds-p-around_medium"
+                                                                        label="Emergecny Contact Phone" name="TR1__Mobile__c"
+                                                                        value="">
+                                                                    </lightning-input>
+                                                                    <br />
+                                                                </lightning-layout-item>
+                                                            </lightning-layout>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class={docSection}>
+                                                <h3 class="slds-section__title">
+                                                    <button class="slds-button slds-section__title-action"
+                                                        onclick={handleDocClick}>
+                                                        <lightning-icon icon-name="utility:switch"
+                                                            class="slds-button__icon slds-button__icon_left slds-section__title-action-icon"
+                                                            size="x-small"></lightning-icon>
+                                                        <span class="slds-truncate" title={label}>Documents</span>
+                                                    </button>
+                                                </h3>
+                                                <div class="slds-section__content">
+                                                    <lightning-card icon-name="doctype:word" title="My CV"
+                                                        class="slds-col doc-card">
+                                                        <div slot="actions">
+                                                            <lightning-button-icon icon-name="utility:edit"
+                                                                alternative-text="Edit record">
+                                                            </lightning-button-icon>
+                                                        </div>
+                                                        <div class="slds-var-p-horizontal_small">
+                                                            <div class="slds-media">
+                                                                <div class="slds-media__body">
+                                                                    <p>Document Name: CV.docx</p>
+                                                                    <p>Document Date: 08-09-2022</p>
+                                                                    <div class="slds-form-element">
+                                                                        <label class="slds-checkbox_toggle slds-grid">
+                                                                            <span
+                                                                                class="slds-form-element__label slds-m-bottom_none">Is
+                                                                                Active?</span>
+                                                                            <input type="checkbox"
+                                                                                name="checkbox-toggle-1"
+                                                                                value="checkbox-toggle-1"
+                                                                                aria-describedby="checkbox-toggle-1"
+                                                                                checked="" />
+                                                                            <span id="checkbox-toggle-1"
+                                                                                class="slds-checkbox_faux_container"
+                                                                                aria-live="assertive">
+                                                                                <span class="slds-checkbox_faux"></span>
+                                                                            </span>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </lightning-card>
+                                                    <div class="slds-align_absolute-center">
+                                                        <div class="slds-box"
+                                                            style="width:65%; border: 3px dashed #5a534d;">
+                                                            <p>Supporting Documentation</p>
+                                                            <lightning-file-upload label="Attach Files"
+                                                                name="uploadFile" accept={acceptedFormats}
+                                                                record-id={app_ID}
+                                                                onuploadfinished={handleUploadFinished} multiple>
+                                                            </lightning-file-upload>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </template>
+                                        <template if:true={finished}>
+                                            <img src="https://i.imgur.com/OkKn31A.png" alt="Success Tick">
+                                        </template>
+                                    </div>
+                                    <!-- Modal/Popup Box LWC footer starts here -->
+                                    <footer class="slds-modal__footer">
+                                        <button class="slds-button slds-button_neutral" onclick={closeModal}
+                                            title="Cancel">Close</button>
+                                        <button class="slds-button slds-button_brand" onclick={appliedToJob}
+                                            title="Apply Now">Apply Now</button>
+                                    </footer>
+                                </div>
+                            </section>
+                            <div class="slds-backdrop slds-backdrop_open"></div>
+                        </template>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-large-size_4-of-12">
+                        <div class="slds-box slds-theme " style="margin-right: 3%; margin-left: 3%; border-radius: 20px; border-width: 2px;">
+                            <h2 style="color: rgb(1, 21, 39); text-align:center; font-size: 20px;">Contact Details</h2>
+                            <p class="slds-var-p-horizontal_small" style=" text-align:center; font-size: 16px; "> 
+                                    {record.TR1__Job_Owner__c} </p>
+                            <p class="slds-var-p-horizontal_small" style=" text-align:center; font-size: 16px; "> 
+                                    arthur.jordan@bhdemo.com </p>
+                            <p class="slds-var-p-horizontal_small" style=" text-align:center; font-size: 16px; "> 
+                                    07872445173 </p>
+                            <div class="mybtn slds-grid slds-align_absolute-center" style="font-size: medium;" >
+                                <!-- <lightning-button label="Request Info" onclick={openModal}></lightning-button> -->
+                                <button class="slds-col slds-button slds-button_brand btnCustomStyle"
+                                    style="background-color: rgb(28, 93, 175) ; color: aliceblue; border-radius: 30px;"
+                                    onclick={openModal}>Request Info</button>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="slds-box slds-theme" style="margin-right: 3%; margin-left: 3%; border-radius: 20px; border-width: 2px;">
+                            <h2 style="color: rgb(1, 21, 39); text-align:center; font-size: 20px;">Apply for
+                                {record.TR1__Job_Title__c}</h2>
+                            <div class="mybtn slds-grid" style="font-size: medium;">
+                                <button class="slds-col slds-button slds-button_brand btnCustomStyle"
+                                    style="background-color: rgb(1, 145, 97) ; color: aliceblue; border-radius: 30px;"
+                                    onclick={applyToJob}>Apply Now</button>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="slds-box slds-theme" style="font-size: 18px; margin-right: 3%; margin-left: 3%; border-radius: 20px; border-width: 2px;">
+                            <h2 style="color: rgb(1, 21, 39); text-align:center; ">Information on work
+                                experience at {record.TR1__Account_Name__c}</h2>
+                            <img src={nhsImage} alt="NHS Education Building" width="400" height="400">
+                        </div>
+
+                    </div>
+                </div>
+            </lightning-card>
+        </div>
+    </template>
+</template>
